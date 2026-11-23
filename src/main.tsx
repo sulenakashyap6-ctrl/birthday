@@ -12,12 +12,12 @@ const defaultSettings: SettingsData = {
  photos: [], captions: ['HA HA HA! WAHI WALI PHOTO! 😂😂','Is photo ko dekhkar camera bhi resign kar gaya!','Handsome banne ki koshish jaari hai!','Beauty ka password galat hai!','NASA is face ko study kar raha hai!'],
  shayari:['Na tu hero hai, na tera koi style hai,\nPhir bhi teri dosti meri life ka highlight hai! 😂','Khana dekhte hi aankhon mein chamak aa jaati hai,\nAur baat-baat pe iski ladai shuru ho jaati hai! 🍕','Ladta hai, jhagadta hai, hamesha bakbak karta hai,\nPar mera pagal dost dil se sabse achha lagta hai! ❤️','Na iski ladai khatam hoti hai,\nNa iski bhukh kam hoti hai,\nBhagwan bachaye duniya ko,\nJab Kartik ki entry hoti hai! 😂'],
  questions:['Tu mera dost hai kya? 🤨','Tu itna ladta kyun hai?','Teri sabse badi speciality kya hai?'], answers:['Jhooth bolne ki bhi hadd hoti hai! 😂','Finally sach bol diya, proud of you! 😭','Iska ilaaj duniya ke kisi doctor ke paas nahi hai!','Congratulations! Tu officially certified Ladaku Wiman + Bhukkad + Nautanki hai!'],
- welcome:"Ajj teri birthday hai, isliye aaj tujhe gaali nahi denge... shayad! 😂", cake:"Tu sach mein ek alag hi piece hai. Kabhi Ladaku Wiman, kabhi Bhukkad, kabhi comedian!", friendship:"Tu dost nahi, ek lifetime ka headache hai... par apna headache hai! 😂❤️", final:'HAPPY BIRTHDAY KARTIK, MY FAVOURITE LADAKU WIMAN! 🥳❤️'
+ welcome:"Ajj teri birthday hai, isliye aaj tujhe sirf pyaari wishes denge... shayad! 😂", cake:"Tu sach mein ek alag hi piece hai. Kabhi Ladaku Wiman, kabhi Bhukkad, kabhi comedian!", friendship:"Tu dost nahi, ek lifetime ka headache hai... par apna headache hai! 😂❤️", final:'HAPPY BIRTHDAY KARTIK, MY FAVOURITE LADAKU WIMAN! 🥳❤️'
 };
 
 const sceneOrder: Scene[] = ['welcome','game','photo','report','shayari','cake','friendship','final'];
 
-function loadSettings(){ try { const x=localStorage.getItem('kartik-birthday-settings'); return x?{...defaultSettings,...JSON.parse(x)}:defaultSettings } catch{return defaultSettings} }
+function loadSettings(){ try { const x=localStorage.getItem('kartik-birthday-settings'); if(!x)return defaultSettings; const saved={...defaultSettings,...JSON.parse(x)} as SettingsData; if(/gaali|gali/i.test(saved.welcome)) saved.welcome=defaultSettings.welcome; return saved } catch{return defaultSettings} }
 
 function App(){
  const [scene,setScene]=useState<Scene>('welcome'); const [settings,setSettings]=useState<SettingsData>(loadSettings);
